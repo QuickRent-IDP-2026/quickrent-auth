@@ -1,8 +1,11 @@
 from fastapi import FastAPI, HTTPException
 import requests
 import os
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
+
+Instrumentator().instrument(app).expose(app)
 
 DATA_SERVICE_URL = os.getenv("DATA_SERVICE_URL", "http://data-service:8000")
 
