@@ -26,6 +26,13 @@ def register(user: dict):
     else:
         raise HTTPException(status_code=400, detail="Registration failed at Data Level")
 
+@app.post("/login")
+def login(credentials: dict):
+    if credentials['username'] == "admin" and credentials['password'] == "admin123":
+        return {"status": "success", "is_admin": True}
+    
+    raise HTTPException(status_code=401, detail="Unauthorized")
+
 @app.get("/health")
 def health():
     return {"status": "Auth Service is healthy"}
